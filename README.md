@@ -7,15 +7,15 @@ For more details about the program please have a look at the Nanodegree [Syllabu
 
 
 # Projects
-### [P1: Facial Keypoint Detection](/01_Finding_Lane_Lines)
+### [P1: Facial Keypoint Detection](/projects/FacialKeypointDetection)
 Use image processing techniques and deep learning techniques to detect faces in an image and find facial keypoints, such as the position of the eyes, nose, and mouth on a face.
 
 
 # Notes:
-### [Module 1: Classical Computer Vision](Notes/Notes_M1_Classical_Computer_Vision.ipynb)
+### [Module 1: Classical Computer Vision](/notes/Notes_M1_Classical_Computer_Vision.ipynb)
 DOCME
 
-### [PyTorch Templates - CNN MNIST](Notes/Templates_PyTorch_MNIST_CNN.ipynb)
+### [PyTorch Templates - CNN MNIST](/notes/Templates_PyTorch_MNIST_CNN.ipynb)
 DOCME
 
 
