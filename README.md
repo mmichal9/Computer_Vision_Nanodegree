@@ -7,7 +7,7 @@ For more details about the program please have a look at the Nanodegree [Syllabu
 
 
 # Projects
-### [P1: Facial Keypoint Detection](/projects/FacialKeypointDetection)
+### [P1: Facial Keypoint Detection](/projects/facial_keypoint_detection)
 Use image processing techniques and deep learning techniques to detect faces in an image and find facial keypoints, such as the position of the eyes, nose, and mouth on a face.
 
 
