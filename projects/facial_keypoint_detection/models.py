@@ -7,8 +7,7 @@ import torch.nn.init as I
 
 
 class Net(nn.Module):
-    """ Initial model"""
-    
+
     def __init__(self):
         super(Net, self).__init__()
         
@@ -30,66 +29,81 @@ class Net(nn.Module):
         ## x is the input image and, as an example, here you may choose to include a pool/conv step:
         ## x = self.pool(F.relu(self.conv1(x)))
         
+        
         # a modified x, having gone through all the layers of your model, should be returned
         return x
     
     
     
     
-class Net2(nn.Module):
+class NetTiny(nn.Module):
+    """ Initial model"""
+    
+    def __init__(self):
+        """ """
+        super(NetTiny, self).__init__()
+        self.conv = nn.Conv2d(in_channels = 1, out_channels = 32, kernel_size = 5)
+        self.fc = nn.Linear(in_features = 484128, out_features = 68*2)
+    
+    def forward(self, x):
+        """ """
+        x = F.relu(F.max_pool2d(self.conv(x),2))
+        x = x.view(x.size(0), -1)
+        x = self.fc(x) # last layer no activation!
+        return x
+
+    
+    
+    
+class KeyPointNetCNN(nn.Module):
 
     def __init__(self):
-        super(Net2, self).__init__()
+        super(KeyPointNetCNN, self).__init__()
+        """ """
+        # Covolutional:
+        self.conv1 = nn.Conv2d(in_channels = 1, out_channels = 32, kernel_size = 5)
+        self.conv2 = nn.Conv2d(in_channels = 32, out_channels = 64, kernel_size = 3)
+        self.conv3 = nn.Conv2d(in_channels = 64, out_channels = 64, kernel_size = 3)
+        self.conv4 = nn.Conv2d(in_channels = 64, out_channels = 96, kernel_size = 3)
 
-        # Covolutional Layers
-        self.conv1 = nn.Conv2d(in_channels = 1, out_channels = 64, kernel_size = 5)
-        self.conv2 = nn.Conv2d(in_channels = 64, out_channels = 128, kernel_size = 3)
-        self.conv3 = nn.Conv2d(in_channels = 128, out_channels = 256, kernel_size = 3)
-        self.conv4 = nn.Conv2d(in_channels = 256, out_channels = 256, kernel_size = 3)
+        # Batch Normalisation CNN:
+        self.conv1_bn = nn.BatchNorm2d(32)
+        self.conv2_bn = nn.BatchNorm2d(64)
+        self.conv3_bn = nn.BatchNorm2d(64)
+        self.conv4_bn = nn.BatchNorm2d(96)
+        
+        # Batch Normalisation Dens:
+        self.fc1_bn = nn.BatchNorm1d(6528)
+        self.fc2_bn = nn.BatchNorm1d(1088)
+        
+        # Dense:
+        self.fc1 = nn.Linear(in_features = 16224, out_features = 6528)
+        self.fc2 = nn.Linear(in_features = 6528, out_features = 1088)
+        self.fc3 = nn.Linear(in_features = 1088, out_features = 68*2)
 
-        # Maxpooling Layer
-        self.pool = nn.MaxPool2d(kernel_size = 2, stride = 2)
-
-        # Dense Layers
-        self.fc1 = nn.Linear(in_features = 43264, out_features = 1000)
-        self.fc2 = nn.Linear(in_features = 1000,  out_features = 1000)
-        self.fc3 = nn.Linear(in_features = 1000,  out_features = 136)
-
-        # Dropouts
+        # Dropouts:
+        self.drop1 = nn.Dropout(p = 0.1)
+        self.drop2 = nn.Dropout(p = 0.2)
         self.drop4 = nn.Dropout(p = 0.4)
 
         
     def forward(self, x):
-
-        # Convolution + Activation + Pooling
-        # Convolution + Activation + Pooling
-        # Dropout
-        # Convolution + Activation + Pooling 
-        # Dropout
-        # Convolution + Activation + Pooling 
+        """ """
+        x = F.relu(F.max_pool2d(self.conv1_bn(self.conv1(x)),2))
+        x = F.relu(F.max_pool2d(self.conv2_bn(self.conv2(x)),2))
+        x = self.drop1(x)
         
-        # Flatten
+        x = F.relu(F.max_pool2d(self.conv3_bn(self.conv3(x)),2))
+        x = self.drop2(x)
         
-        # Dense + Activation
-        # Dense + Activation
-        # Dense + Activation
+        x = F.relu(F.max_pool2d(self.conv4_bn(self.conv4(x)),2))
+        x = self.drop2(x)
         
-        
-        x = self.pool(F.relu(self.conv1(x)))
-        x = self.pool(F.relu(self.conv2(x)))
-        x = self.drop4(x)
-        x = self.pool(F.relu(self.conv3(x)))
-        x = self.drop4(x)
-        x = self.pool(F.relu(self.conv4(x)))
-        #print(x.shape)
-
         x = x.view(x.size(0), -1)
-        #print(x.shape)
-
-        x = F.relu(self.fc1(x))
-        x = F.relu(self.fc2(x))
-        x = F.relu(self.fc3(x))
-        #print(x.shape)
-
-
+        
+        x = self.drop2(F.relu(self.fc1_bn(self.fc1(x))))
+        x = self.drop2(F.relu(self.fc2_bn(self.fc2(x))))
+        x = self.fc3(x) # last layer no activation!
         return x
+    
+    
