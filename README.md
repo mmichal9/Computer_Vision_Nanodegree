@@ -1,25 +1,57 @@
-# Computer Vision Nanodegree
+# Computer Vision Nanodegree:
 Computer Vision Nanodegree Notes and Projects [Computer Vision Nanodegree](https://www.udacity.com/course/computer-vision-nanodegree--nd891).
 
 
-# Nanodegree Overview
+# Nanodegree Overview:
 For more details about the program please have a look at the Nanodegree [Syllabus](/data/CVND_Syllabus.pdf) or visit [Computer Vision Nanodegree](https://www.udacity.com/course/computer-vision-nanodegree--nd891).
 
 
-# Projects
-### [P1: Facial Keypoint Detection](/projects/facial_keypoint_detection)
+
+# Projects:
+<!--
+## [P1: Facial Keypoint Detection](/projects/facial_keypoint_detection)
+
+<p>
+<img align="left" width="300" height="250" src="data/images/P1_1.png">
+
 Use image processing techniques and deep learning techniques to detect faces in an image and find facial keypoints, such as the position of the eyes, nose, and mouth on a face.
+</p>
+--- -->
+
+
+<table>
+  <tr>
+    <td valign="center"><img src="data/images/p1_1.png" width="400" height="150"></td>
+    <td valign="top">
+    <p><h2><a href="projects/facial_keypoint_detection">P1: Facial Keypoints Detection</a>
+    </h2></p>
+    Use image processing techniques and deep learning techniques to detect faces in an image and find facial keypoints, such as the position of the eyes, nose, and mouth on a face.</td>
+  </tr>
+ </table>
 
 
 # Notes:
-### [Module 1: Classical Computer Vision](/notes/Notes_M1_Classical_Computer_Vision.ipynb)
-DOCME
 
-### [PyTorch Templates - CNN MNIST](/notes/Templates_PyTorch_MNIST_CNN.ipynb)
-DOCME
+<table>
+  <tr>
+    <td valign="center"><img src="data/images/n1.png" width="400" height="150"></td>
+    <td valign="top">
+    <p><h2><a href="notes/Notes_M1_Classical_Computer_Vision.ipynb">Module 1: Classical Computer Vision</a>
+    </h2></p>
+    Utilise basic Classical Computer Vision techniques such as Image Filtering, Masking, Canny Edge Detection, Hough Lines, Fast Fourier Transform.</td>
+  </tr>
+  <tr>
+    <td valign="center"><img src="data/images/n2.png" width="400" height="150"></td>
+    <td valign="top">
+    <p><h2><a href="notes/Templates_PyTorch_MNIST_CNN.ipynb">PyTorch Templates - CNN MNIST</a>
+    </h2></p>
+    TODO</td>
+  </tr>
+
+ </table>
 
 
-# Setup
+# Setup:
 Setup conda environment for Computer Vision Nanodegree using [official guide](https://github.com/udacity/CVND_Exercises) or instruction below:
 
 ```
