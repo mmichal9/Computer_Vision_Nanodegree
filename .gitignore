@@ -1,8 +1,9 @@
 .ipynb_checkpoints/
-notes/.ipynb_checkpoints/
-projects/.ipynb_checkpoints/
-notes/data/datasets/
+__pycache__/
 .vscode/
-projects/facial_keypoint_detection/__pycache__/
+notes/data/datasets/
 projects/facial_keypoint_detection/data/
 projects/facial_keypoint_detection/saved_models/
+projects/image_captioning/data/
+projects/image_captioning/saved_models/
+projects/image_captioning/opt/

@@ -8,25 +8,26 @@ For more details about the program please have a look at the Nanodegree [Syllabu
 
 
 # Projects:
-<!--
-## [P1: Facial Keypoint Detection](/projects/facial_keypoint_detection)
-
-<p>
-<img align="left" width="300" height="250" src="data/images/P1_1.png">
-
-Use image processing techniques and deep learning techniques to detect faces in an image and find facial keypoints, such as the position of the eyes, nose, and mouth on a face.
-</p>
---- -->
 
 
 <table>
-  <tr>
-    <td valign="center"><img src="data/images/p1_1.png" width="400" height="150"></td>
-    <td valign="top">
-    <p><h2><a href="projects/facial_keypoint_detection">P1: Facial Keypoints Detection</a>
-    </h2></p>
-    Use image processing techniques and deep learning techniques to detect faces in an image and find facial keypoints, such as the position of the eyes, nose, and mouth on a face.</td>
-  </tr>
+    <tr>
+        <td valign="center"><img src="data/images/p1.png" width="400" height="150"></td>
+        <td valign="top">
+        <p><h2>
+        <a href="projects/facial_keypoint_detection">P1: Facial Keypoints Detection</a>
+        </h2></p>
+        Use image processing techniques and deep learning techniques to detect faces in an image and find facial keypoints, such as the position of the eyes, nose, and mouth on a face.</td>
+    </tr>
+    <tr>
+        <td valign="center"><img src="data/images/p2.png" width="400" height="150"></td>
+        <td valign="top">
+        <p><h2>
+        <a href="projects/image_captioning">P2: Image Captioning</a>
+        </h2></p>
+        TODO
+        </td>
+    </tr>
  </table>
 
 
