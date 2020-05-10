@@ -1,4 +1,5 @@
 # Computer Vision Nanodegree:
+[![Udacity Computer Vision Nanodegree](data/images/cvnd.svg)](https://www.udacity.com/course/computer-vision-nanodegree--nd891)<br>
 Computer Vision Nanodegree Notes and Projects [Computer Vision Nanodegree](https://www.udacity.com/course/computer-vision-nanodegree--nd891).
 
 
