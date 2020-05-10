@@ -14,13 +14,13 @@ def get_loader(transform,
                mode='train',
                batch_size=1,
                vocab_threshold=None,
-               vocab_file='./vocab.pkl',
+               vocab_file='data/vocab.pkl',
                start_word="<start>",
                end_word="<end>",
                unk_word="<unk>",
                vocab_from_file=True,
                num_workers=0,
-               cocoapi_loc='/opt'):
+               cocoapi_loc='data/opt'):
     """Returns the data loader.
     Args:
       transform: Image transform.
