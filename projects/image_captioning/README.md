@@ -3,6 +3,30 @@
 
 TODO: ALL
 
+
+
+```
+# http://cocodataset.org/#download
+
+data
+├── vocab.pkl
+└── opt
+    └── cocoapi
+        ├── annotations     # http://images.cocodataset.org/annotations/annotations_trainval2014.zip
+        │   ├── captions_train2014.json
+        │   ├── captions_val2014.json
+        │   ├── image_info_test2014.json
+        │   ├── instances_train2014.json
+        │   ├── instances_val2014.json
+        │   ├── person_keypoints_train2014.json
+        │   └── person_keypoints_val2014.json
+        └── images
+            ├─── test2014   # http://images.cocodataset.org/zips/test2014.zip
+            │    └── ...
+            └─── test2014   # http://images.cocodataset.org/zips/train2014.zip
+                 └── ...
+```
+
 <!-- # Instructions
 1. Clone this repo: https://github.com/cocodataset/cocoapi
 ```
