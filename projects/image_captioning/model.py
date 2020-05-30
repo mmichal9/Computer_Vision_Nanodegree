@@ -4,9 +4,12 @@ import torchvision.models as models
 
 
 class EncoderCNN(nn.Module):
+    """Encoder Netwok - ResNet50 striped of the last layer raplased with the custom """
+    
     def __init__(self, embed_size):
         super(EncoderCNN, self).__init__()
         resnet = models.resnet50(pretrained=True)
+        
         for param in resnet.parameters():
             param.requires_grad_(False)
 
@@ -14,61 +17,45 @@ class EncoderCNN(nn.Module):
         self.resnet = nn.Sequential(*modules)
         self.embed = nn.Linear(resnet.fc.in_features, embed_size)
 
+        
     def forward(self, images):
-        features = self.resnet(images)
-        features = features.view(features.size(0), -1)
-        features = self.embed(features)
-        return features
+        encoding_vector = self.resnet(images)
+        encoding_vector = encoding_vector.view(encoding_vector.size(0), -1)
+        encoding_vector = self.embed(encoding_vector)
+        return encoding_vector
 
 
+    
 class DecoderRNN(nn.Module):
-        """ """
+    """ Decoder Netowrk - Network design to interpret the encoded image data and produce a sentance"""
 
     def __init__(self, embed_size, hidden_size, vocab_size, num_layers=1):
         super(DecoderRNN, self).__init__()
-
-        self.word_embedding_layer = nn.Embedding(vocab_size, embed_size)
-        self.lstm = nn.LSTM( input_size = embed_size, hidden_size = hidden_size, num_layers = num_layers, dropout = 0, batch_first=True)
-        self.linear_fc = nn.Linear(hidden_size, vocab_size)
-
+        
+        self.hidden_dim = hidden_size
+        self.embed = nn.Embedding(vocab_size, embed_size)
+        self.lstm = nn.LSTM(embed_size, hidden_size, num_layers, batch_first=True)
+        self.linear = nn.Linear(hidden_size, vocab_size)
+        self.hidden = (torch.zeros(1, 1, hidden_size),torch.zeros(1, 1, hidden_size))
+   
 
     def forward(self, features, captions):
-        """ """
-        captions = captions[:, :-1]                                     # Remove <end> token
-        captions = self.word_embedding_layer(captions)                  # Pass image caption through embeding layer
-        inputs = torch.cat((features.unsqueeze(1), captions), dim=1)    # Concatenate the feature vectors for image and captions
-        outputs, _ = self.lstm(inputs)                                  # Get the output and hidden state
-        outputs = self.linear_fc(outputs)                               # Flatten the output
-
+        """ Forward pass of the RNN network"""
+        cap_embedding = self.embed(captions[:,:-1])                      
+        embeddings = torch.cat((features.unsqueeze(1), cap_embedding), 1)
+        lstm_out, self.hidden = self.lstm(embeddings)                              
+        outputs = self.linear(lstm_out)
         return outputs
 
 
-    def sample(self, inputs, states=None, max_len=25):
-        """ """
-        outputs = []
-        output_length = 0
-
-        while (output_length != max_len+1):
-
-            # LSTM layer
-            output, states = self.lstm(inputs,states)
-
-            # Linear layer
-            output = self.linear_fc(output.squeeze(dim = 1))
-            _, predicted_index = torch.max(output, 1)
-
-            # Append output (move data from the gpu to cpu first)
-            outputs.append(predicted_index.cpu().numpy()[0].item())
-
-            # Brake if <end> encountered (<end> = 1)
-            if (predicted_index == 1):
-                break
-
-            # Embed the last prediction to be the new input to the LSTM
-            inputs = self.word_embedding_layer(predicted_index)
-            inputs = inputs.unsqueeze(1)
-
-            # Move to the next iteration
-            output_length += 1
-
-        return outputs
+    def sample(self, inputs, hidden=None, max_len=20):
+        """ Takes pre-processed image tensor and returns predicted sentence."""
+        res = []
+        
+        for i in range(max_len):
+            outputs, hidden = self.lstm(inputs, hidden)
+            outputs = self.linear(outputs.squeeze(1))
+            target_index = outputs.max(1)[1]
+            res.append(target_index.item())
+            inputs = self.embed(target_index).unsqueeze(1)
+        return res
