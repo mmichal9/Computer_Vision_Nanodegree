@@ -26,7 +26,7 @@ For more details about the program please have a look at the Nanodegree [Syllabu
         <p><h2>
         <a href="projects/image_captioning">P2: Image Captioning</a>
         </h2></p>
-        TODO
+        Combine image processing and deep learning knowledge to create CNN-RNN model that will be trained on the COCO image dataset to produce  captions given an input images.
         </td>
     </tr>
  </table>

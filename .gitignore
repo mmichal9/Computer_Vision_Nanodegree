@@ -7,3 +7,5 @@ projects/facial_keypoint_detection/saved_models/
 projects/image_captioning/data/
 projects/image_captioning/saved_models/
 projects/image_captioning/opt/
+projects/image_captioning/training_log.txt
+projects/image_captioning/image_captioning.zip
